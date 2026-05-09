@@ -6,7 +6,12 @@ The application provides an interactive web dashboard where users can view trans
 
 The main objective of the project is to transform unstructured SMS transaction messages into structured and meaningful financial insights that help users better understand and track their Mobile Money activities.
 
+## System architecture
 
-the System architecture : https://app.eraser.io/workspace/znYjFYirT5nuLa2PLyfn?origin=share
+![MoMo SMS Analyzer system architecture diagram: Frontend (Next.js + Tailwind), Backend (NestJS REST API), External Libraries (xml2js / fast-xml, JWT), Database (MySQL)](docs/system-architecture.png)
 
-system Scrum board: https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNjFhMjljYTQyYzI5NDdlMWI5NmNiOTllZjljZmFkNjIiLCJwIjoiaiJ9
+Interactive diagram (Eraser): https://app.eraser.io/workspace/znYjFYirT5nuLa2PLyfn?origin=share
+
+## Scrum board
+
+https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNjFhMjljYTQyYzI5NDdlMWI5NmNiOTllZjljZmFkNjIiLCJwIjoiaiJ9
