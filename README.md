@@ -1,10 +1,10 @@
 Project Description
 
-The MoMo SMS Analyzer System is a full-stack enterprise application developed to process, manage, and analyze Mobile Money SMS transaction data exported in XML format. The system enables users to upload XML files containing MoMo SMS records, automatically extract and clean transaction details, classify transactions according to their type, and store the processed information in a relational database.
+The MoMo SMS Analyzer System is a fullstack enterprise application designed to process, manage, and analyze Mobile Money SMS transaction data exported in XML format. The system allows users to upload XML files containing MoMo SMS records, automatically extract and clean transaction information, categorize transactions based on their type, and store the processed data in a relational database. 
 
-The application features an interactive web dashboard that allows users to review transaction history, track income and expenses, and analyze financial activities using charts, summaries, and reports. It is designed to showcase skills in backend data processing, database management, API development, and frontend data visualization through the use of modern full-stack technologies.
+The application provides an interactive web dashboard where users can view transaction histories, monitor income and expenses, and analyze financial activities through charts, summaries, and reports. The system is designed to demonstrate backend data processing, database management, API development, and frontend data visualization skills using modern fullstack development technologies. 
 
-The primary goal of the project is to convert unstructured SMS transaction messages into organized and valuable financial insights, helping users effectively monitor and understand their Mobile Money activities.
+The main objective of the project is to transform unstructured SMS transaction messages into structured and meaningful financial insights that help users better understand and track their Mobile Money activities.
 
 ## System architecture
 
