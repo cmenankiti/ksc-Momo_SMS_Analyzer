@@ -1,0 +1,8 @@
+{
+  "name": "momo-sms-analyzer-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "echo \"Placeholder: npm install @nestjs/cli then nest start\""
+  }
+}

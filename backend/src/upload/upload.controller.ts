@@ -1,0 +1,2 @@
+// UploadController — POST uploads
+export {};

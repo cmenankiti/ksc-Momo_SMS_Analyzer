@@ -1,0 +1,1 @@
+-- MySQL: Categories entity (classification labels / rules outputs)

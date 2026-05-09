@@ -1,0 +1,2 @@
+-- MySQL: Users entity (credentials, profile linked to uploads & transactions)
+-- Add columns after ORM/domain model is fixed (e.g. id, email, password_hash, created_at).

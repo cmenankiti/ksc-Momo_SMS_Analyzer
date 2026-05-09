@@ -1,0 +1,1 @@
+-- MySQL: Transactions entity (normalized MoMo SMS-derived rows)
