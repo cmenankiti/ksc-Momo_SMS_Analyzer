@@ -1,6 +1,7 @@
 {
   "name": "momo-sms-analyzer-frontend",
   "version": "0.0.0",
+  "description": "Frontend for the MoMo SMS Analyzer application",
   "private": true,
   "scripts": {
     "dev": "echo \"Placeholder: npm install next react react-dom then run dev\"",
