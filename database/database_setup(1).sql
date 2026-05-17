@@ -236,10 +236,7 @@ LEFT JOIN transactions t ON (t.sender_id = u.id OR t.receiver_id = u.id)
 GROUP BY u.id, u.full_name, u.phone_number;
 
 
--- ============================================================
 -- SEED DATA
--- ============================================================
-
 -- Users (passwords are bcrypt placeholders)
 INSERT INTO users (full_name, phone_number, email, password, role) VALUES
 ('Alice Uwimana',      '+250788100001', 'alice@example.rw',   '$2b$12$hash_alice',   'admin'),
