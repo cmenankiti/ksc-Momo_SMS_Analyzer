@@ -201,10 +201,7 @@ CREATE INDEX idx_logs_status         ON system_logs(status);
 CREATE INDEX idx_logs_created_at     ON system_logs(created_at);
 
 
--- ============================================================
 -- VIEWS for common analytics queries
--- ============================================================
-
 -- Monthly income vs expense summary
 CREATE OR REPLACE VIEW vw_monthly_summary AS
 SELECT
