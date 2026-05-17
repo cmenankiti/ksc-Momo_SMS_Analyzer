@@ -6,6 +6,21 @@ MoMo SMS Analyzer System is a complete enterprise application that enables the i
 ![MoMo SMS Analyzer system architecture diagram: Frontend (Next.js + Tailwind), Backend (NestJS REST API), External Libraries (xml2js / fast-xml, JWT), Database (MySQL)](docs/system-architecture.png)
 
 Interactive diagram (Eraser): https://app.eraser.io/workspace/znYjFYirT5nuLa2PLyfn?origin=share
+## Database Design
+
+### Entity Relationship Diagram
+
+![ERD Diagram](docs/ERD.jpeg)
+
+| Table                    | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| `users`                  | Stores user accounts with role, contact info, and active status             |
+| `transaction_categories` | Classifies transactions as income or expense with a description             |
+| `tags`                   | User-created labels that can be applied to transactions                     |
+| `uploaded_files`         | Tracks every XML file upload, its parse status, and processing metadata     |
+| `transactions`           | Core table storing every MoMo transaction with sender, receiver, amount, fee, balance, type, and status |
+| `transaction_tags`       | Junction table resolving the many-to-many relationship between transactions and tags |
+| `system_logs`            | Logs every action taken on a transaction or by a user, including IP address and status |
 
 ## Scrum board
 
