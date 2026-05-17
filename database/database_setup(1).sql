@@ -137,10 +137,8 @@ CREATE INDEX idx_txn_date_type        ON transactions(transaction_date, transact
 CREATE INDEX idx_txn_sender_date      ON transactions(sender_id, transaction_date);
 
 
--- ============================================================
 -- TABLE: tags
 -- Free-form labels users can apply to transactions
--- ============================================================
 CREATE TABLE tags (
     id              INT             UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT 'Tag identifier',
     tag_name        VARCHAR(50)     NOT NULL UNIQUE                     COMMENT 'Unique tag label',
@@ -155,10 +153,8 @@ CREATE TABLE tags (
 CREATE INDEX idx_tags_created_by ON tags(created_by);
 
 
--- ============================================================
 -- TABLE: transaction_tags  (junction — resolves M:N)
 -- Links transactions to tags (many-to-many)
--- ============================================================
 CREATE TABLE transaction_tags (
     transaction_id  INT             UNSIGNED NOT NULL COMMENT 'FK → transactions.id',
     tag_id          INT             UNSIGNED NOT NULL COMMENT 'FK → tags.id',
