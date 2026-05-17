@@ -175,10 +175,8 @@ CREATE INDEX idx_tt_tag_id    ON transaction_tags(tag_id);
 CREATE INDEX idx_tt_tagged_by ON transaction_tags(tagged_by);
 
 
--- ============================================================
 -- TABLE: system_logs
 -- Audit trail for all data processing events
--- ============================================================
 CREATE TABLE system_logs (
     id              INT             UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT 'Log entry identifier',
     transaction_id  INT             UNSIGNED                            COMMENT 'FK → transactions.id (nullable)',
@@ -356,10 +354,7 @@ INSERT INTO system_logs (transaction_id, user_id, action_type, log_message, stat
 (NULL, 1, 'REPORT_EXPORT',  'Monthly analytics report exported as PDF by Alice',       'Success', '196.12.50.1');
 
 
--- ============================================================
 -- SAMPLE QUERIES demonstrating system functionality
--- ============================================================
-
 -- Q1: Total completed transactions per category
 SELECT
     c.category_name,
