@@ -1,0 +1,215 @@
+{
+  "_comment": "MoMo SMS Analyzer – JSON Schema Examples",
+  "_version": "1.0",
+  "_description": "Demonstrates how relational DB entities serialize for REST API responses",
+
+  "schemas": {
+
+    "user": {
+      "_table_mapping": "users",
+      "_description": "Single user object returned from GET /auth/profile",
+      "example": {
+        "id": 1,
+        "fullName": "Alice Uwimana",
+        "phoneNumber": "+250788100001",
+        "email": "alice@example.rw",
+        "role": "admin",
+        "isActive": true,
+        "createdAt": "2025-01-10T08:00:00Z"
+      }
+    },
+
+    "transaction_category": {
+      "_table_mapping": "transaction_categories",
+      "_description": "Category lookup item returned from GET /categories",
+      "example": {
+        "id": 1,
+        "categoryName": "Incoming Money",
+        "description": "Money received from another MoMo account or bank",
+        "isIncome": true,
+        "createdAt": "2025-01-01T00:00:00Z"
+      }
+    },
+
+    "tag": {
+      "_table_mapping": "tags",
+      "_description": "Tag object used for transaction labelling",
+      "example": {
+        "id": 3,
+        "tagName": "salary",
+        "createdBy": {
+          "id": 2,
+          "fullName": "Bob Niyonzima"
+        },
+        "createdAt": "2025-01-12T10:00:00Z"
+      }
+    },
+
+    "uploaded_file": {
+      "_table_mapping": "uploaded_files",
+      "_description": "Uploaded XML file metadata from GET /upload/files",
+      "example": {
+        "id": 1,
+        "uploadedBy": {
+          "id": 1,
+          "fullName": "Alice Uwimana"
+        },
+        "filename": "momo_export_jan2025.xml",
+        "fileSizeKb": 245.5,
+        "parseStatus": "completed",
+        "recordsParsed": 87,
+        "uploadedAt": "2025-01-15T07:30:00Z"
+      }
+    },
+
+    "system_log": {
+      "_table_mapping": "system_logs",
+      "_description": "Audit log entry from GET /logs",
+      "example": {
+        "id": 8,
+        "transaction": null,
+        "actor": {
+          "id": 3,
+          "fullName": "Claire Mukamana"
+        },
+        "actionType": "XML_PARSE",
+        "logMessage": "Parse failed: malformed XML at line 44",
+        "status": "Error",
+        "ipAddress": "196.12.52.3",
+        "createdAt": "2025-03-05T11:22:00Z"
+      }
+    },
+
+    "transaction_simple": {
+      "_table_mapping": "transactions",
+      "_description": "Lightweight transaction row for paginated list (GET /transactions)",
+      "example": {
+        "id": 1,
+        "externalTransactionId": "TXN20250115001",
+        "transactionType": "Transfer",
+        "transactionStatus": "Completed",
+        "amount": 50000.00,
+        "fee": 250.00,
+        "balanceAfter": 320000.00,
+        "categoryName": "Transfer",
+        "transactionDate": "2025-01-15T09:23:00Z"
+      }
+    },
+
+    "transaction_full": {
+      "_table_mapping": "transactions + users + transaction_categories + tags + system_logs",
+      "_description": "Complete transaction object with all related data (GET /transactions/:id). This is the complex nested object demonstrating full relational serialization.",
+      "example": {
+        "id": 1,
+        "externalTransactionId": "TXN20250115001",
+
+        "sender": {
+          "id": 1,
+          "fullName": "Alice Uwimana",
+          "phoneNumber": "+250788100001"
+        },
+        "receiver": {
+          "id": 2,
+          "fullName": "Bob Niyonzima",
+          "phoneNumber": "+250788100002"
+        },
+
+        "category": {
+          "id": 2,
+          "categoryName": "Transfer",
+          "isIncome": false
+        },
+
+        "financials": {
+          "amount": 50000.00,
+          "fee": 250.00,
+          "balanceAfter": 320000.00,
+          "currency": "RWF"
+        },
+
+        "transactionType": "Transfer",
+        "transactionStatus": "Completed",
+        "transactionDate": "2025-01-15T09:23:00Z",
+        "createdAt": "2025-01-15T09:23:05Z",
+
+        "sourceFile": {
+          "id": 1,
+          "filename": "momo_export_jan2025.xml",
+          "uploadedAt": "2025-01-15T07:30:00Z"
+        },
+
+        "tags": [
+          { "id": 6, "tagName": "business" }
+        ],
+
+        "auditLogs": [
+          {
+            "id": 3,
+            "actionType": "TXN_INSERT",
+            "logMessage": "Transaction TXN20250115001 inserted successfully",
+            "status": "Success",
+            "createdAt": "2025-01-15T09:23:05Z"
+          }
+        ],
+
+        "rawMessage": "RWF 50,000 transferred to Bob Niyonzima (0788100002). Fee: RWF 250. New balance: RWF 320,000. TxnID: TXN20250115001."
+      }
+    },
+
+    "analytics_monthly": {
+      "_table_mapping": "vw_monthly_summary (derived from transactions + transaction_categories)",
+      "_description": "Monthly analytics payload for dashboard charts (GET /analytics/monthly)",
+      "example": {
+        "period": "2025-01",
+        "summary": {
+          "totalTransactions": 87,
+          "totalIncomeRwf": 700000.00,
+          "totalExpenseRwf": 175250.00,
+          "totalFeesRwf": 1425.00,
+          "netBalanceChangeRwf": 524750.00
+        },
+        "byCategory": [
+          { "category": "Incoming Money", "count": 12, "totalRwf": 700000.00, "isIncome": true },
+          { "category": "Transfer",       "count": 30, "totalRwf": 125000.00, "isIncome": false },
+          { "category": "Withdrawal",     "count": 15, "totalRwf": 30000.00,  "isIncome": false },
+          { "category": "Airtime",        "count": 20, "totalRwf": 10000.00,  "isIncome": false },
+          { "category": "Payment",        "count": 8,  "totalRwf": 15000.00,  "isIncome": false },
+          { "category": "Bundle Purchase","count": 2,  "totalRwf": 5000.00,   "isIncome": false }
+        ],
+        "chartData": {
+          "labels":   ["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29"],
+          "income":   [0, 200000, 500000, 700000, 700000],
+          "expenses": [0, 50000, 100000, 150000, 175250]
+        }
+      }
+    },
+
+    "sql_to_json_mapping": {
+      "_description": "Documents how SQL column names map to JSON field names (camelCase convention)",
+      "mappings": [
+        { "table": "users",                   "sql_column": "full_name",                "json_field": "fullName" },
+        { "table": "users",                   "sql_column": "phone_number",             "json_field": "phoneNumber" },
+        { "table": "users",                   "sql_column": "created_at",               "json_field": "createdAt" },
+        { "table": "users",                   "sql_column": "is_active",                "json_field": "isActive" },
+        { "table": "transaction_categories",  "sql_column": "category_name",            "json_field": "categoryName" },
+        { "table": "transaction_categories",  "sql_column": "is_income",                "json_field": "isIncome" },
+        { "table": "transactions",            "sql_column": "sender_id",                "json_field": "sender (nested object)" },
+        { "table": "transactions",            "sql_column": "receiver_id",              "json_field": "receiver (nested object)" },
+        { "table": "transactions",            "sql_column": "category_id",              "json_field": "category (nested object)" },
+        { "table": "transactions",            "sql_column": "balance_after",            "json_field": "financials.balanceAfter" },
+        { "table": "transactions",            "sql_column": "transaction_type",         "json_field": "transactionType" },
+        { "table": "transactions",            "sql_column": "transaction_status",       "json_field": "transactionStatus" },
+        { "table": "transactions",            "sql_column": "external_transaction_id",  "json_field": "externalTransactionId" },
+        { "table": "transactions",            "sql_column": "transaction_date",         "json_field": "transactionDate (ISO 8601)" },
+        { "table": "transactions",            "sql_column": "raw_message",              "json_field": "rawMessage" },
+        { "table": "uploaded_files",          "sql_column": "file_size_kb",             "json_field": "fileSizeKb" },
+        { "table": "uploaded_files",          "sql_column": "parse_status",             "json_field": "parseStatus" },
+        { "table": "uploaded_files",          "sql_column": "records_parsed",           "json_field": "recordsParsed" },
+        { "table": "system_logs",             "sql_column": "action_type",              "json_field": "actionType" },
+        { "table": "system_logs",             "sql_column": "log_message",              "json_field": "logMessage" },
+        { "table": "system_logs",             "sql_column": "ip_address",               "json_field": "ipAddress" },
+        { "table": "transaction_tags",        "sql_column": "(junction resolved)",      "json_field": "tags: [ { id, tagName } ]" }
+      ]
+    }
+  }
+}
