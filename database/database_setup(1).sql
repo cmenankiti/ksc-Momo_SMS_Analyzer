@@ -48,11 +48,11 @@ CREATE INDEX idx_categories_income ON transaction_categories(is_income);
 
 
 CREATE TABLE uploaded_files (
-    id              INT             UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT 'File record identifier',
-    user_id         INT             UNSIGNED NOT NULL                   COMMENT 'FK → users.id (uploader)',
-    filename        VARCHAR(255)    NOT NULL                            COMMENT 'Original uploaded filename',
-    file_size_kb    DECIMAL(10,2)                                       COMMENT 'File size in kilobytes',
-    storage_path    VARCHAR(500)    NOT NULL                            COMMENT 'Server path or object storage key',
+    id              INT             UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id         INT             UNSIGNED NOT NULL,
+    filename        VARCHAR(255)    NOT NULL                            ,
+    file_size_kb    DECIMAL(10,2)                                       ,
+    storage_path    VARCHAR(500)    NOT NULL                            ,
     parse_status    ENUM('pending','processing','completed','failed')
                                     NOT NULL DEFAULT 'pending'          COMMENT 'Current parsing pipeline status',
     records_parsed  INT             UNSIGNED DEFAULT 0                  COMMENT 'Number of transactions extracted',
