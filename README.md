@@ -25,7 +25,8 @@ Interactive diagram (Eraser): https://app.eraser.io/workspace/znYjFYirT5nuLa2PLy
 [https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNjFhMjljYTQyYzI5NDdlMWI5NmNiOTllZjljZmFkNjIiLCJwIjoiaiJ9 ](https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiZjVkNjBiNzkwZTVhNDU5N2IxNzI2NzY0Mzc1ZWE1NzgiLCJwIjoiaiJ9)
 
 ## Database design document :
-https://docs.google.com/document/d/1JWWAZZJoGsCs7KUraEPK8Gr0D5zhxjluy1PFXl4AuRE/edit?usp=sharing
+[https://docs.google.com/document/d/1JWWAZZJoGsCs7KUraEPK8Gr0D5zhxjluy1PFXl4AuRE/edit?usp=sharing
+](https://drive.google.com/file/d/1xr6fkH2GX-a9VC8z4p89LgNcViH0WUTy/view?usp=sharing)
 ## Team participation sheet :
 https://docs.google.com/spreadsheets/d/1tQis34b8VEomj6hto6GXQBBBC7-OiAbuki6xb8gRRGs/edit?usp=sharing
 
