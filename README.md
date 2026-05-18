@@ -22,7 +22,7 @@ Interactive diagram (Eraser): https://app.eraser.io/workspace/znYjFYirT5nuLa2PLy
 
 ## Scrum board
 
-https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNjFhMjljYTQyYzI5NDdlMWI5NmNiOTllZjljZmFkNjIiLCJwIjoiaiJ9 
+[https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNjFhMjljYTQyYzI5NDdlMWI5NmNiOTllZjljZmFkNjIiLCJwIjoiaiJ9 ](https://alustudent-team-ewd3ksc.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiZjVkNjBiNzkwZTVhNDU5N2IxNzI2NzY0Mzc1ZWE1NzgiLCJwIjoiaiJ9)
 
 
 ## Team Members
