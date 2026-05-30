@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSC MoMo SMS API — Test Screenshots</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #161820;
+    --border: #252830;
+    --accent-green: #00e5a0;
+    --accent-red: #ff4d6d;
+    --accent-amber: #ffb84d;
+    --accent-blue: #4d9fff;
+    --text: #e2e6f0;
+    --muted: #6b7280;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    padding: 2rem 1rem 4rem;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #00e5a0 0%, #4d9fff 100%);
+    color: #000;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .3rem .8rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin-bottom: .5rem;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: .9rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(580px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .9rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.02);
+  }
+
+  .method-badge {
+    font-family: var(--mono);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding: .25rem .6rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .GET  { background: rgba(77,159,255,.15); color: var(--accent-blue); }
+  .POST { background: rgba(0,229,160,.15);  color: var(--accent-green); }
+  .PUT  { background: rgba(255,184,77,.15); color: var(--accent-amber); }
+  .DELETE { background: rgba(255,77,109,.15); color: var(--accent-red); }
+
+  .card-title {
+    font-size: .88rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    flex: 1;
+  }
+
+  .status-pill {
+    font-family: var(--mono);
+    font-size: .68rem;
+    padding: .2rem .5rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .s200 { background: rgba(0,229,160,.12); color: var(--accent-green); border: 1px solid rgba(0,229,160,.3); }
+  .s201 { background: rgba(0,229,160,.12); color: var(--accent-green); border: 1px solid rgba(0,229,160,.3); }
+  .s401 { background: rgba(255,77,109,.12); color: var(--accent-red); border: 1px solid rgba(255,77,109,.3); }
+  .s404 { background: rgba(255,184,77,.12); color: var(--accent-amber); border: 1px solid rgba(255,184,77,.3); }
+  .s422 { background: rgba(255,77,109,.12); color: var(--accent-red); border: 1px solid rgba(255,77,109,.3); }
+
+  .cmd-block {
+    background: #0a0b0e;
+    padding: .75rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: .75rem;
+    color: #7dd3fc;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .cmd-block::before { content: '$ '; color: var(--muted); }
+
+  .json-block {
+    padding: 1rem 1.2rem;
+    font-family: var(--mono);
+    font-size: .73rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    max-height: 340px;
+    overflow-y: auto;
+    color: #c9d1d9;
+  }
+
+  /* JSON syntax highlighting */
+  .json-block .key   { color: #79c0ff; }
+  .json-block .str   { color: #a5d6ff; }
+  .json-block .num   { color: #f2cc60; }
+  .json-block .bool  { color: var(--accent-green); }
+  .json-block .null  { color: var(--muted); }
+
+  .section-label {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: .4rem 1.2rem;
+    background: rgba(255,255,255,.02);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .divider {
+    text-align: center;
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 2rem 0 1rem;
+    font-family: var(--mono);
+  }
+
+  /* Scrollbar styling */
+  .json-block::-webkit-scrollbar { width: 4px; height: 4px; }
+  .json-block::-webkit-scrollbar-track { background: transparent; }
+  .json-block::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: .05em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Team KSC · REST API Tests</div>
+  <h1>MoMo SMS Analyzer<br>API Test Results</h1>
+  <p class="subtitle">Chigozirim Menankiti · Samuel Nizeyimana · Mamashenge Kendra</p>
+</header>
+
+<div class="divider">── Authentication Tests ──────────────────────</div>
+
+<div class="grid">
+
+<!-- TEST 1: GET all with auth -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge GET">GET</span>
+    <span class="card-title">/transactions — List all (valid auth)</span>
+    <span class="status-pill s200">200 OK</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 http://localhost:8080/transactions</div>
+  <div class="section-label">Response (first 3 of 25 transactions shown)</div>
+  <div class="json-block"><pre>{
+  <span class="key">"status"</span>: <span class="str">"success"</span>,
+  <span class="key">"count"</span>: <span class="num">25</span>,
+  <span class="key">"transactions"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="num">1</span>,
+      <span class="key">"externalTransactionId"</span>: <span class="str">"TXN20250103001"</span>,
+      <span class="key">"transactionType"</span>: <span class="str">"Incoming"</span>,
+      <span class="key">"transactionStatus"</span>: <span class="str">"Completed"</span>,
+      <span class="key">"amount"</span>: <span class="num">50000.0</span>,
+      <span class="key">"fee"</span>: <span class="num">0.0</span>,
+      <span class="key">"balanceAfter"</span>: <span class="num">320000.0</span>,
+      <span class="key">"currency"</span>: <span class="str">"RWF"</span>,
+      <span class="key">"senderName"</span>: <span class="str">"Alice Uwimana"</span>,
+      <span class="key">"receiverName"</span>: <span class="null">null</span>,
+      <span class="key">"phoneNumber"</span>: <span class="str">"0788100001"</span>,
+      <span class="key">"transactionDate"</span>: <span class="str">"2025-01-03T08:15:22"</span>,
+      <span class="key">"rawMessage"</span>: <span class="str">"You have received 50,000 RWF from Alice Uwimana..."</span>,
+      <span class="key">"createdAt"</span>: <span class="str">"2026-05-30T10:24:39Z"</span>
+    },
+    <span class="null">// ... 24 more records</span>
+  ]
+}</pre></div>
+</div>
+
+<!-- TEST 2: 401 wrong credentials -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge GET">GET</span>
+    <span class="card-title">/transactions — Wrong credentials</span>
+    <span class="status-pill s401">401 Unauthorized</span>
+  </div>
+  <div class="cmd-block">curl -u wrong:credentials http://localhost:8080/transactions</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"error"</span>: <span class="str">"Unauthorized"</span>,
+  <span class="key">"message"</span>: <span class="str">"Valid Basic Authentication credentials required."</span>,
+  <span class="key">"hint"</span>: <span class="str">"Set header: Authorization: Basic &lt;base64(username:password)&gt;"</span>
+}</pre></div>
+</div>
+
+<!-- TEST 3: 401 no credentials -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge GET">GET</span>
+    <span class="card-title">/transactions — No credentials (no Authorization header)</span>
+    <span class="status-pill s401">401 Unauthorized</span>
+  </div>
+  <div class="cmd-block">curl http://localhost:8080/transactions</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"error"</span>: <span class="str">"Unauthorized"</span>,
+  <span class="key">"message"</span>: <span class="str">"Valid Basic Authentication credentials required."</span>,
+  <span class="key">"hint"</span>: <span class="str">"Set header: Authorization: Basic &lt;base64(username:password)&gt;"</span>
+}</pre></div>
+</div>
+
+</div>
+
+<div class="divider">── CRUD Operations ───────────────────────────</div>
+
+<div class="grid">
+
+<!-- TEST 4: GET single -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge GET">GET</span>
+    <span class="card-title">/transactions/5 — Single transaction</span>
+    <span class="status-pill s200">200 OK</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 http://localhost:8080/transactions/5</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"status"</span>: <span class="str">"success"</span>,
+  <span class="key">"transaction"</span>: {
+    <span class="key">"id"</span>: <span class="num">5</span>,
+    <span class="key">"externalTransactionId"</span>: <span class="str">"TXN20250111005"</span>,
+    <span class="key">"transactionType"</span>: <span class="str">"Airtime"</span>,
+    <span class="key">"transactionStatus"</span>: <span class="str">"Completed"</span>,
+    <span class="key">"amount"</span>: <span class="num">2000.0</span>,
+    <span class="key">"fee"</span>: <span class="num">0.0</span>,
+    <span class="key">"balanceAfter"</span>: <span class="num">247590.0</span>,
+    <span class="key">"currency"</span>: <span class="str">"RWF"</span>,
+    <span class="key">"transactionDate"</span>: <span class="str">"2025-01-11T16:40:00"</span>,
+    <span class="key">"rawMessage"</span>: <span class="str">"You have purchased 2,000 RWF airtime for 0788100001..."</span>,
+    <span class="key">"createdAt"</span>: <span class="str">"2026-05-30T10:24:39Z"</span>
+  }
+}</pre></div>
+</div>
+
+<!-- TEST 5: POST create -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge POST">POST</span>
+    <span class="card-title">/transactions — Create new transaction</span>
+    <span class="status-pill s201">201 Created</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 -X POST -H "Content-Type: application/json" \
+  -d '{"transactionType":"Incoming","amount":45000,"fee":0,
+       "rawMessage":"You have received 45,000 RWF from Test Sender..."}' \
+  http://localhost:8080/transactions</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"status"</span>: <span class="str">"created"</span>,
+  <span class="key">"transaction"</span>: {
+    <span class="key">"id"</span>: <span class="num">26</span>,
+    <span class="key">"transactionType"</span>: <span class="str">"Incoming"</span>,
+    <span class="key">"transactionStatus"</span>: <span class="str">"Completed"</span>,
+    <span class="key">"amount"</span>: <span class="num">45000.0</span>,
+    <span class="key">"fee"</span>: <span class="num">0</span>,
+    <span class="key">"senderName"</span>: <span class="str">"Test Sender"</span>,
+    <span class="key">"currency"</span>: <span class="str">"RWF"</span>,
+    <span class="key">"createdAt"</span>: <span class="str">"2026-05-30T10:24:41Z"</span>
+  }
+}</pre></div>
+</div>
+
+<!-- TEST 6: PUT update -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge PUT">PUT</span>
+    <span class="card-title">/transactions/26 — Update transaction</span>
+    <span class="status-pill s200">200 OK</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 -X PUT -H "Content-Type: application/json" \
+  -d '{"transactionStatus":"Pending","fee":50}' \
+  http://localhost:8080/transactions/26</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"status"</span>: <span class="str">"updated"</span>,
+  <span class="key">"transaction"</span>: {
+    <span class="key">"id"</span>: <span class="num">26</span>,
+    <span class="key">"transactionType"</span>: <span class="str">"Incoming"</span>,
+    <span class="key">"transactionStatus"</span>: <span class="str">"Pending"</span>,
+    <span class="key">"amount"</span>: <span class="num">45000.0</span>,
+    <span class="key">"fee"</span>: <span class="num">50</span>,
+    <span class="key">"updatedAt"</span>: <span class="str">"2026-05-30T10:24:41Z"</span>
+  }
+}</pre></div>
+</div>
+
+<!-- TEST 7: DELETE -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge DELETE">DELETE</span>
+    <span class="card-title">/transactions/26 — Delete transaction</span>
+    <span class="status-pill s200">200 OK</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 -X DELETE http://localhost:8080/transactions/26</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"status"</span>: <span class="str">"deleted"</span>,
+  <span class="key">"message"</span>: <span class="str">"Transaction 26 successfully deleted."</span>
+}</pre></div>
+</div>
+
+<!-- TEST 8: 404 after delete -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge GET">GET</span>
+    <span class="card-title">/transactions/26 — After deletion (verify 404)</span>
+    <span class="status-pill s404">404 Not Found</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 http://localhost:8080/transactions/26</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"error"</span>: <span class="str">"Not Found"</span>,
+  <span class="key">"message"</span>: <span class="str">"Transaction 26 not found."</span>
+}</pre></div>
+</div>
+
+<!-- TEST 9: 422 validation -->
+<div class="card">
+  <div class="card-header">
+    <span class="method-badge POST">POST</span>
+    <span class="card-title">/transactions — Missing required fields</span>
+    <span class="status-pill s422">422 Unprocessable</span>
+  </div>
+  <div class="cmd-block">curl -u admin:ksc_admin123 -X POST -H "Content-Type: application/json" \
+  -d '{"amount":5000}' http://localhost:8080/transactions</div>
+  <div class="section-label">Response</div>
+  <div class="json-block"><pre>{
+  <span class="key">"error"</span>: <span class="str">"Unprocessable Entity"</span>,
+  <span class="key">"message"</span>: <span class="str">"Missing required fields: transactionType, rawMessage"</span>
+}</pre></div>
+</div>
+
+</div>
+
+<footer>
+  <p>KSC Team · MoMo SMS Analyzer API · All tests executed against localhost:8080</p>
+  <p style="margin-top:.4rem">Python http.server · Basic Authentication · 25 real transactions parsed from XML</p>
+</footer>
+
+</body>
+</html>
